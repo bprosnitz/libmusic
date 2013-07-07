@@ -48,4 +48,13 @@ public class NoteTest {
             // expected
         }
     }
+
+    @Test
+    public void testEqualsAndHashcode() {
+        for (int i = 0; i < FLAT_NAMES.length; ++i) {
+            Assert.assertEquals(new Note(FLAT_NAMES[i]), new Note(SHARP_NAMES[i]));
+            Assert.assertEquals(new Note(SHARP_NAMES[i]), new Note(FLAT_NAMES[i]));
+            Assert.assertEquals(new Note(FLAT_NAMES[i]).hashCode(), new Note(SHARP_NAMES[i]).hashCode());
+        }
+    }
 }

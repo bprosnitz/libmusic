@@ -50,4 +50,22 @@ public class Pitch {
     public double getFrequency() {
         return Math.pow(2.0, ((double)(getNoteIndex() - 57)) / (double)NOTES_IN_OCTAVE) * FREQUENCY_MIDDLE_A;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Pitch)) {
+            return false;
+        }
+        Pitch other = (Pitch)obj;
+
+        return octave == other.octave && note.equals(other.note);
+    }
+
+    @Override
+    public int hashCode() {
+        return octave * 12 + note.getIndex();
+    }
 }

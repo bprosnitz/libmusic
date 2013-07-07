@@ -62,4 +62,16 @@ public class PitchTest {
         assertCloseFrequencies(440.00, new Pitch("A4").getFrequency());
         assertCloseFrequencies(146.83, new Pitch("D3").getFrequency());
     }
+
+    @Test
+    public void testEquals() {
+        Assert.assertEquals(new Pitch("Gb4"), new Pitch("F#4"));
+        Assert.assertEquals(new Pitch("B0"), new Pitch("B", 0));
+    }
+
+    @Test
+    public void testHashCode() {
+        Assert.assertEquals(new Pitch("Gb4").hashCode(), new Pitch("F#4").hashCode());
+        Assert.assertEquals(new Pitch("B0").hashCode(), new Pitch("B", 0).hashCode());
+    }
 }
