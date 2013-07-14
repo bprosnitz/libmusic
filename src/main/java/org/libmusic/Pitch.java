@@ -52,6 +52,11 @@ public class Pitch {
     }
 
     @Override
+    public String toString() {
+        return note.toString() + octave;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

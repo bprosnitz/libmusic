@@ -21,7 +21,7 @@ public class Chord {
         return new HashSet<Note>(notes);
     }
 
-    public Collection<String> getNames() {
+    public Collection<ChordView> getChordViews() {
         throw new UnsupportedOperationException("Not implemented");
     }
 

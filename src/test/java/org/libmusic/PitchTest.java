@@ -64,6 +64,12 @@ public class PitchTest {
     }
 
     @Test
+    public void testToString() {
+        Assert.assertEquals("F#4", new Pitch("Gb4").toString());
+        Assert.assertEquals("D0", new Pitch("D0").toString());
+    }
+
+    @Test
     public void testEquals() {
         Assert.assertEquals(new Pitch("Gb4"), new Pitch("F#4"));
         Assert.assertEquals(new Pitch("B0"), new Pitch("B", 0));

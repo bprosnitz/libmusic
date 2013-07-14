@@ -50,6 +50,12 @@ public class NoteTest {
     }
 
     @Test
+    public void testToString() {
+        Assert.assertEquals("F#", new Note("Gb").toString());
+        Assert.assertEquals("B", new Note("B").toString());
+    }
+
+    @Test
     public void testEqualsAndHashcode() {
         for (int i = 0; i < FLAT_NAMES.length; ++i) {
             Assert.assertEquals(new Note(FLAT_NAMES[i]), new Note(SHARP_NAMES[i]));
