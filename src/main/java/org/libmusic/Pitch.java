@@ -10,6 +10,10 @@ public class Pitch {
     private final Note note;
     private final int octave;
 
+    public Pitch(Note note, int octaveNumber) {
+        this.note = note;
+        this.octave = octaveNumber;
+    }
 
     public Pitch(String noteName, int octaveNumber) {
         this.note = new Note(noteName);
@@ -51,6 +55,17 @@ public class Pitch {
         return Math.pow(2.0, ((double)(getNoteIndex() - 57)) / (double)NOTES_IN_OCTAVE) * FREQUENCY_MIDDLE_A;
     }
 
+    /**
+     * Returns the pitch shifted by the specified offset. e.g. A3.shiftPitch(13)=A#4
+     * @param offset The offset to shift the pitch by.
+     * @return The pitch, shifted by the specified offset.
+     */
+    public Pitch shiftPitch(int offset) {
+        Note shiftedNote = getNote().shiftNote(offset);
+        int newOctave = getOctave() + (offset / 12);
+        return new Pitch(shiftedNote, newOctave);
+    }
+
     @Override
     public String toString() {
         return note.toString() + octave;
@@ -71,6 +86,6 @@ public class Pitch {
 
     @Override
     public int hashCode() {
-        return octave * 12 + note.getIndex();
+        return octave * NOTES_IN_OCTAVE + note.getIndex();
     }
 }

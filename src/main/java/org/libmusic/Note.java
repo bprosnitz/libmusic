@@ -73,6 +73,16 @@ public class Note {
         return NOTES_IN_OCTAVE_FLAT.get(index);
     }
 
+    /**
+     * Shifts a note by the specified offset. e.g. A.shiftNote(-1)=G#
+     * @param offset The offset to shift the note by
+     * @return A note, shifted by the specified offset.
+     */
+    public Note shiftNote(int offset) {
+        int newIndex = (getIndex() + offset) % 12;
+        return new Note(newIndex);
+    }
+
     @Override
     public String toString() {
         return getName(NoteNameType.Sharp);

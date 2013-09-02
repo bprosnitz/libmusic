@@ -10,6 +10,11 @@ public class PitchTest {
         Assert.assertEquals(2, pitch.getOctave());
         Assert.assertEquals("F#", pitch.getNote().getName(Note.NoteNameType.Sharp));
 
+        Note note = new Note("B");
+        pitch = new Pitch(note, 3);
+        Assert.assertEquals(3, pitch.getOctave());
+        Assert.assertEquals(new Note("B"), pitch.getNote());
+
         try {
             new Pitch("A", -1);
         } catch (IllegalArgumentException e) {
@@ -61,6 +66,13 @@ public class PitchTest {
         assertCloseFrequencies(4698.64, new Pitch("D8").getFrequency());
         assertCloseFrequencies(440.00, new Pitch("A4").getFrequency());
         assertCloseFrequencies(146.83, new Pitch("D3").getFrequency());
+    }
+
+    @Test
+    public void testShiftPitch() {
+        Assert.assertEquals(new Pitch("A3").shiftPitch(13), new Pitch("A#4"));
+        Assert.assertEquals(new Pitch("C3").shiftPitch(-12), new Pitch("C2"));
+        Assert.assertEquals(new Pitch("A3").shiftPitch(5), new Pitch("D3"));
     }
 
     @Test

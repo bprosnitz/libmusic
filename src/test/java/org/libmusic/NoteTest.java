@@ -50,6 +50,19 @@ public class NoteTest {
     }
 
     @Test
+    public void testShiftNote() {
+        Note A = new Note("A");
+        Assert.assertEquals(new Note("A"), A.shiftNote(0));
+        Assert.assertEquals(new Note("G#"), A.shiftNote(-1));
+        Assert.assertEquals(new Note("B"), A.shiftNote(2));
+
+        Note E = new Note("E");
+        Assert.assertEquals(new Note("E"), E.shiftNote(12));
+        Assert.assertEquals(new Note("F"), E.shiftNote(13));
+        Assert.assertEquals(new Note("A"), E.shiftNote(5));
+    }
+
+    @Test
     public void testToString() {
         Assert.assertEquals("F#", new Note("Gb").toString());
         Assert.assertEquals("B", new Note("B").toString());
