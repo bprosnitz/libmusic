@@ -21,14 +21,18 @@ public enum Interval {
         }
     }
 
-    int distance;
-    Integer intervalNumber;
-    IntervalQuality intervalQuality;
+    private int distance;
+    private Integer intervalNumber;
+    private IntervalQuality intervalQuality;
 
     Interval(int distance, Integer intervalNumber, IntervalQuality intervalQuality) {
         this.distance = distance;
         this.intervalNumber = intervalNumber;
         this.intervalQuality = intervalQuality;
+    }
+
+    public int getDistance() {
+        return distance;
     }
 
     /**
