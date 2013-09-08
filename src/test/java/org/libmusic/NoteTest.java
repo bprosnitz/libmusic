@@ -76,4 +76,12 @@ public class NoteTest {
             Assert.assertEquals(new Note(FLAT_NAMES[i]).hashCode(), new Note(SHARP_NAMES[i]).hashCode());
         }
     }
+
+    @Test
+    public void testMultipleNames() {
+        Assert.assertEquals(new Note("E#"), new Note("F"));
+        Assert.assertEquals(new Note("Fb"), new Note("E"));
+        Assert.assertEquals(new Note("B#"), new Note("C"));
+        Assert.assertEquals(new Note("Cb"), new Note("B"));
+    }
 }

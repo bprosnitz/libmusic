@@ -13,9 +13,8 @@ public class Note {
             Arrays.asList("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B");
     private static List<String> NOTES_IN_OCTAVE_SHARP =
             Arrays.asList("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B");
-
     /**
-     * The zero-based index of the musical note in the string lists above, from "C" to "B". 0 is "C", 11 is "B".
+     * The zero-based index of the musical note in the string lists above where "A" is 0, "B" is 2, etc.
      */
     private final int index;
 
@@ -39,26 +38,70 @@ public class Note {
     }
 
     /**
-     * Create a note.
-     * @param noteName The name of the note. e.g. "A", "Gb" or "C#"
-     */
-    public Note(String noteName) {
-        int index = NOTES_IN_OCTAVE_FLAT.indexOf(noteName);
-        if (index == -1) {
-            index = NOTES_IN_OCTAVE_SHARP.indexOf(noteName);
-        }
-        if (index == -1) {
-            throw new IllegalArgumentException("Unable to recognize note '" + noteName + "'");
-        }
-        this.index = index;
-    }
-
-    /**
      * Get the zero-based index of the note.
      * @return The zero based index of the note where C is 0 and B is 11.
      */
     public int getIndex() {
         return index;
+    }
+
+    /**
+     * Create a note.
+     * @param noteName The name of the note. e.g. "A", "Gb" or "C#"
+     */
+    public Note(String noteName) {
+        if (noteName.isEmpty()) {
+            throw new IllegalArgumentException("Illegal empty note name");
+        }
+
+        noteName = noteName.toLowerCase();
+
+        int noteIndex;
+        switch (noteName.charAt(0)) {
+            case 'c':
+                noteIndex = 0;
+                break;
+            case 'd':
+                noteIndex = 2;
+                break;
+            case 'e':
+                noteIndex = 4;
+                break;
+            case 'f':
+                noteIndex = 5;
+                break;
+            case 'g':
+                noteIndex = 7;
+                break;
+            case 'a':
+                noteIndex = 9;
+                break;
+            case 'b':
+                noteIndex = 11;
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal initial note name '" + noteName.charAt(0) + "'");
+        }
+
+        for (int index = 1; index < noteName.length(); ++index) {
+            Character ch = noteName.charAt(index);
+            switch (ch) {
+                case 'b':
+                    --noteIndex;
+                    break;
+                case '#':
+                    ++noteIndex;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unallowed character: '" + ch + "'");
+            }
+        }
+
+        noteIndex %= 12;
+        if (noteIndex < 0) {
+            noteIndex += 12;
+        }
+        this.index = noteIndex;
     }
 
     /**
@@ -79,7 +122,7 @@ public class Note {
      * @return A note, shifted by the specified offset.
      */
     public Note shiftNote(int offset) {
-        int newIndex = (getIndex() + offset) % 12;
+        int newIndex = (index + offset) % 12;
         return new Note(newIndex);
     }
 
