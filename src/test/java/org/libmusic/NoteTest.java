@@ -60,6 +60,8 @@ public class NoteTest {
         Assert.assertEquals(new Note("E"), E.shiftNote(12));
         Assert.assertEquals(new Note("F"), E.shiftNote(13));
         Assert.assertEquals(new Note("A"), E.shiftNote(5));
+
+        Assert.assertEquals(new Note("B"), new Note("C").shiftNote(-1));
     }
 
     @Test
@@ -83,5 +85,16 @@ public class NoteTest {
         Assert.assertEquals(new Note("Fb"), new Note("E"));
         Assert.assertEquals(new Note("B#"), new Note("C"));
         Assert.assertEquals(new Note("Cb"), new Note("B"));
+    }
+
+    @Test
+    public void testAmountAboveClosest() {
+        Assert.assertEquals(0, new Note("A").amountAboveClosest(new Note("A")));
+        Assert.assertEquals(0, new Note("C").amountAboveClosest(new Note("C")));
+        Assert.assertEquals(1, new Note("C").amountAboveClosest(new Note("Cb")));
+        Assert.assertEquals(11, new Note("C").amountAboveClosest(new Note("C#")));
+        Assert.assertEquals(10, new Note("G").amountAboveClosest(new Note("A")));
+        Assert.assertEquals(9, new Note("B").amountAboveClosest(new Note("D")));
+        Assert.assertEquals(3, new Note("D").amountAboveClosest(new Note("B")));
     }
 }

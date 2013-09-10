@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Pitch {
-    private static double FREQUENCY_MIDDLE_A = 440.0f;
     public static int NOTES_IN_OCTAVE = 12;
 
     private final Note note;
@@ -47,12 +46,8 @@ public class Pitch {
         return octave;
     }
 
-    private int getNoteIndex() {
+    public int getNoteIndex() {
         return octave * 12 + note.getIndex();
-    }
-
-    public double getFrequency() {
-        return Math.pow(2.0, ((double)(getNoteIndex() - 57)) / (double)NOTES_IN_OCTAVE) * FREQUENCY_MIDDLE_A;
     }
 
     /**
@@ -62,8 +57,22 @@ public class Pitch {
      */
     public Pitch shiftPitch(int offset) {
         Note shiftedNote = getNote().shiftNote(offset);
-        int newOctave = getOctave() + (offset / 12);
-        return new Pitch(shiftedNote, newOctave);
+        if (offset >= 0) {
+            int amountBelowC = new Note("C").amountAboveClosest(getNote());
+            int offsetFromC = offset - amountBelowC;
+            int numberOfTimesCrossingC = offsetFromC / 12;
+            if (amountBelowC > 0) {
+                ++numberOfTimesCrossingC;
+            }
+            int newOctave = getOctave() + numberOfTimesCrossingC;
+            return new Pitch(shiftedNote, newOctave);
+        } else {
+            int amountAboveC = getNote().amountAboveClosest(new Note("C"));
+            int offsetFromC = (-offset) - amountAboveC;
+            int numberOfTimesCrossingC = (11 + offsetFromC) / 12;
+            int newOctave = getOctave() - numberOfTimesCrossingC;
+            return new Pitch(shiftedNote, newOctave);
+        }
     }
 
     @Override

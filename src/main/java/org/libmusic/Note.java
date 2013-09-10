@@ -14,7 +14,7 @@ public class Note {
     private static List<String> NOTES_IN_OCTAVE_SHARP =
             Arrays.asList("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B");
     /**
-     * The zero-based index of the musical note in the string lists above where "A" is 0, "B" is 2, etc.
+     * The zero-based index of the musical note in the string lists above where "C" is 0, "D" is 2, etc.
      */
     private final int index;
 
@@ -123,7 +123,23 @@ public class Note {
      */
     public Note shiftNote(int offset) {
         int newIndex = (index + offset) % 12;
+        if (newIndex < 0) {
+            newIndex += 12;
+        }
         return new Note(newIndex);
+    }
+
+    /**
+     * The amount above (distance to) the closest note of the specified type.
+     * @param other The type of the note to compute the distance to
+     * @return The distance of this note about the specified note.
+     */
+    public int amountAboveClosest(Note other) {
+        int diff = this.index - other.index;
+        if (diff >= 0) {
+            return diff;
+        }
+        return 12 + diff;
     }
 
     @Override

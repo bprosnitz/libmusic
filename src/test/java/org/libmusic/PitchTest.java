@@ -55,24 +55,16 @@ public class PitchTest {
         }
     }
 
-    public void assertCloseFrequencies(double reference, double computed) {
-        double difference = Math.abs(reference - computed);
-        Assert.assertTrue(computed + " is further than 0.01 from " + reference, difference <= 0.01);
-    }
-
-    @Test
-    public void testGetFrequencies() {
-        assertCloseFrequencies(16.35, new Pitch("C0").getFrequency());
-        assertCloseFrequencies(4698.64, new Pitch("D8").getFrequency());
-        assertCloseFrequencies(440.00, new Pitch("A4").getFrequency());
-        assertCloseFrequencies(146.83, new Pitch("D3").getFrequency());
-    }
-
     @Test
     public void testShiftPitch() {
-        Assert.assertEquals(new Pitch("A3").shiftPitch(13), new Pitch("A#4"));
-        Assert.assertEquals(new Pitch("C3").shiftPitch(-12), new Pitch("C2"));
-        Assert.assertEquals(new Pitch("A3").shiftPitch(5), new Pitch("D3"));
+        Assert.assertEquals(new Pitch("A#4"), new Pitch("A3").shiftPitch(13));
+        Assert.assertEquals(new Pitch("C2"), new Pitch("C3").shiftPitch(-12));
+        Assert.assertEquals(new Pitch("D4"), new Pitch("A3").shiftPitch(5));
+        Assert.assertEquals(new Pitch("C3"), new Pitch("C3").shiftPitch(0));
+        Assert.assertEquals(new Pitch("C#3"), new Pitch("C3").shiftPitch(1));
+        Assert.assertEquals(new Pitch("B2"), new Pitch("C3").shiftPitch(-1));
+        Assert.assertEquals(new Pitch("A1"), new Pitch("C3").shiftPitch(-15));
+        Assert.assertEquals(new Pitch("C#2"), new Pitch("C3").shiftPitch(-11));
     }
 
     @Test
