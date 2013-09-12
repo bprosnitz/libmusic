@@ -59,10 +59,12 @@ public class PitchTest {
     public void testShiftPitch() {
         Assert.assertEquals(new Pitch("A#4"), new Pitch("A3").shiftPitch(13));
         Assert.assertEquals(new Pitch("C2"), new Pitch("C3").shiftPitch(-12));
+        Assert.assertEquals(new Pitch("A3"), new Pitch("A3").shiftPitch(0));
         Assert.assertEquals(new Pitch("D4"), new Pitch("A3").shiftPitch(5));
         Assert.assertEquals(new Pitch("C3"), new Pitch("C3").shiftPitch(0));
         Assert.assertEquals(new Pitch("C#3"), new Pitch("C3").shiftPitch(1));
         Assert.assertEquals(new Pitch("B2"), new Pitch("C3").shiftPitch(-1));
+        Assert.assertEquals(new Pitch("C3"), new Pitch("B2").shiftPitch(1));
         Assert.assertEquals(new Pitch("A1"), new Pitch("C3").shiftPitch(-15));
         Assert.assertEquals(new Pitch("C#2"), new Pitch("C3").shiftPitch(-11));
     }

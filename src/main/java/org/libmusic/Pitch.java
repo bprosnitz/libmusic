@@ -57,22 +57,28 @@ public class Pitch {
      */
     public Pitch shiftPitch(int offset) {
         Note shiftedNote = getNote().shiftNote(offset);
+
+        Note lowNote;
         if (offset >= 0) {
-            int amountBelowC = new Note("C").amountAboveClosest(getNote());
-            int offsetFromC = offset - amountBelowC;
-            int numberOfTimesCrossingC = offsetFromC / 12;
-            if (amountBelowC > 0) {
-                ++numberOfTimesCrossingC;
-            }
-            int newOctave = getOctave() + numberOfTimesCrossingC;
-            return new Pitch(shiftedNote, newOctave);
+            lowNote = getNote();
         } else {
-            int amountAboveC = getNote().amountAboveClosest(new Note("C"));
-            int offsetFromC = (-offset) - amountAboveC;
-            int numberOfTimesCrossingC = (11 + offsetFromC) / 12;
-            int newOctave = getOctave() - numberOfTimesCrossingC;
-            return new Pitch(shiftedNote, newOctave);
+            lowNote = shiftedNote;
         }
+
+        int baseFactor = Math.abs(offset / 12);
+        int remainder = Math.abs(offset % 12);
+        int amountBelowC = new Note("C").amountAboveClosest(lowNote);
+        if (remainder >= amountBelowC && amountBelowC != 0) {
+            ++baseFactor;
+        }
+        int newOctave = getOctave();
+
+        if (offset >= 0) {
+            newOctave += baseFactor;
+        } else {
+            newOctave -= baseFactor;
+        }
+        return new Pitch(shiftedNote, newOctave);
     }
 
     @Override
