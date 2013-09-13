@@ -3,6 +3,9 @@ package org.libmusic;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 public class InstrumentStringTest {
     @Test
     public void testStringPitches() {
@@ -24,5 +27,16 @@ public class InstrumentStringTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void testGetStringOffsets() {
+        InstrumentString instrumentString = new InstrumentString(new Pitch("E2"));
+        Collection<Integer> offsets = instrumentString.getStringOffsets (new Note("G"));
+        Assert.assertEquals(Arrays.asList(3, 15), offsets);
+
+        Chord chord = new Chord(new Note("A"), new Note("G"), new Note("F#"));
+        offsets = instrumentString.getStringOffsets(chord);
+        Assert.assertEquals(Arrays.asList(2, 3, 5, 14, 15, 17), offsets);
     }
 }

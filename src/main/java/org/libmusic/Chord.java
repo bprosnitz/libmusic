@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Chord {
+public class Chord implements NoteProvider {
     private final Set<Note> notes;
 
     public Chord(Collection<Note> notes) {

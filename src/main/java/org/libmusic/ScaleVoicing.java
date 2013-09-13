@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ScaleVoicing {
+public class ScaleVoicing implements NoteProvider {
     private Note scaleRoot;
     private Scale scale;
 

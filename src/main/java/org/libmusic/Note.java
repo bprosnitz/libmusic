@@ -1,14 +1,17 @@
 package org.libmusic;
 
+import com.google.common.collect.Sets;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a musical note, without information about the octave.
  *
  * @author benjamin
  */
-public class Note {
+public class Note implements NoteProvider {
     private static List<String> NOTES_IN_OCTAVE_FLAT =
             Arrays.asList("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B");
     private static List<String> NOTES_IN_OCTAVE_SHARP =
@@ -140,6 +143,10 @@ public class Note {
             return diff;
         }
         return 12 + diff;
+    }
+
+    public Set<Note> getNotes() {
+        return Sets.newHashSet(this);
     }
 
     @Override
