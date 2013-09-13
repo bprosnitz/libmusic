@@ -14,7 +14,7 @@ public enum DiatonicScale implements Scale {
     Locrian(6);
 
     public static DiatonicScale MajorScale = Ionian;
-    public static DiatonicScale MinorScale = Aeolian;
+    public static DiatonicScale NaturalMinorScale = Aeolian;
 
     private int mode;
 
