@@ -81,6 +81,16 @@ public class Pitch {
         return new Pitch(shiftedNote, newOctave);
     }
 
+    /**
+     * @return the number of semitones between the two pitches.
+     */
+    public int minus(Pitch other) {
+        int octaveDifference = this.getOctave() - other.getOctave();
+        int otherDifFromC = other.getNote().amountAboveClosest(new Note("C"));
+        int thisDifFromC = this.getNote().amountAboveClosest(new Note("C"));
+        return (thisDifFromC - otherDifFromC) + (octaveDifference * 12);
+    }
+
     @Override
     public String toString() {
         return note.toString() + octave;

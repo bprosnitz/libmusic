@@ -70,6 +70,29 @@ public class PitchTest {
     }
 
     @Test
+    public void testShiftPitchAndMinus() {
+        for (int firstOctave = 1; firstOctave < 4; ++firstOctave) {
+            for (SharpNote firstSharpNode : SharpNote.values()) {
+                Note firstNote = firstSharpNode.getNote();
+
+                for (int secondOctave = 1; secondOctave < 4; ++secondOctave) {
+                    for (SharpNote secondSharpNote : SharpNote.values()) {
+                        Note secondNote = secondSharpNote.getNote();
+                        Pitch firstPitch = new Pitch(firstNote, firstOctave);
+                        Pitch secondPitch = new Pitch(secondNote, secondOctave);
+
+                        int diff = firstPitch.minus(secondPitch);
+                        Assert.assertEquals(-diff, secondPitch.minus(firstPitch));
+
+                        Assert.assertEquals(firstPitch, secondPitch.shiftPitch(diff));
+                        Assert.assertEquals(secondPitch, firstPitch.shiftPitch(-diff));
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
     public void testToString() {
         Assert.assertEquals("F#4", new Pitch("Gb4").toString());
         Assert.assertEquals("D0", new Pitch("D0").toString());

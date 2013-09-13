@@ -7,7 +7,6 @@ public class Fretboard {
     private List<InstrumentString> strings;
 
     public Fretboard(List<InstrumentString> strings) {
-
         this.strings = strings;
     }
 
