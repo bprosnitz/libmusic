@@ -1,9 +1,11 @@
 package org.libmusic;
 
+import com.google.common.collect.Sets;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Set;
 
 public class FretboardTest {
     @Test
@@ -31,5 +33,18 @@ public class FretboardTest {
         Assert.assertEquals(new Pitch("C4"), Fretboard.StandardGuitarFretboard.getString(1).getPitch(1));
         Assert.assertEquals(new Pitch("G4"), Fretboard.StandardGuitarFretboard.getString(0).getPitch(3));
 
+    }
+
+    @Test
+    public void testGetFretboardPositions() {
+        Note note = new Note("C");
+        Set<FretboardPosition> positions = Fretboard.StandardGuitarFretboard.getFretboardPositions(note);
+        Assert.assertEquals(Sets.newHashSet(new FretboardPosition(5, 8),
+                new FretboardPosition(5, 20), new FretboardPosition(4, 3),
+                new FretboardPosition(4, 15), new FretboardPosition(3, 10),
+                new FretboardPosition(3, 22), new FretboardPosition(2, 5),
+                new FretboardPosition(2, 17), new FretboardPosition(1, 1),
+                new FretboardPosition(1, 13), new FretboardPosition(0, 8),
+                new FretboardPosition(0, 20)), positions);
     }
 }

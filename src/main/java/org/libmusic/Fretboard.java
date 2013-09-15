@@ -1,7 +1,9 @@
 package org.libmusic;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Fretboard {
     private List<InstrumentString> strings;
@@ -28,5 +30,20 @@ public class Fretboard {
             throw new IndexOutOfBoundsException("Invalid string index");
         }
         return strings.get(string);
+    }
+
+    public int numStrings() {
+        return strings.size();
+    }
+
+    public Set<FretboardPosition> getFretboardPositions(NoteProvider noteProvider) {
+        Set<FretboardPosition> fretboardPositions = new HashSet<FretboardPosition>();
+        for (int string = 0; string < numStrings(); ++string) {
+            InstrumentString instrumentString = getString(string);
+            for (int position : instrumentString.getStringOffsets(noteProvider)) {
+                fretboardPositions.add(new FretboardPosition(string, position));
+            }
+        }
+        return fretboardPositions;
     }
 }
