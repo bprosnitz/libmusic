@@ -51,8 +51,8 @@ public class ChordViewTest {
      */
     @Test
     public void testChordQuality() throws ChordView.UnexpectedChordStructureException {
-        checkChordQuality(ChordView.ChordQuality.Major, 0, 3, 7);
-        checkChordQuality(ChordView.ChordQuality.Minor, 0, 2, 7);
+        checkChordQuality(ChordView.ChordQuality.Major, 0, 4, 7);
+        checkChordQuality(ChordView.ChordQuality.Minor, 0, 3, 7);
         checkChordQuality(ChordView.ChordQuality.Augmented, 0, 3, 8);
         checkChordQuality(ChordView.ChordQuality.Diminished, 0, 3, 6);
 
