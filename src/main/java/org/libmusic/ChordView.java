@@ -63,9 +63,9 @@ public class ChordView {
     }
 
     public ChordQuality getChordQuality() throws UnexpectedChordStructureException {
-        if (isNotePresent(0) && isNotePresent(3) && isNotePresent(7)) {
+        if (isNotePresent(0) && isNotePresent(4) && isNotePresent(7)) {
             return ChordQuality.Major;
-        } else if (isNotePresent(0) && isNotePresent(2) && isNotePresent(7)) {
+        } else if (isNotePresent(0) && isNotePresent(3) && isNotePresent(7)) {
             return ChordQuality.Minor;
         } else if (isNotePresent(0) && isNotePresent(3) && isNotePresent(8)) {
             return ChordQuality.Augmented;

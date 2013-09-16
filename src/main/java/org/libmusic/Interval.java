@@ -13,7 +13,9 @@ public enum Interval {
     MajorSixth(9, 6, IntervalQuality.Major),
     MinorSeventh(10, 7, IntervalQuality.Minor),
     MajorSeventh(11, 7, IntervalQuality.Minor),
-    Octave(12, 8, IntervalQuality.Perfect);
+    Octave(12, 8, IntervalQuality.Perfect),
+    MinorNinth(13, 9, IntervalQuality.Minor),
+    MajorNinth(14, 10, IntervalQuality.Major);
 
     public static class UnknownIntervalException extends Exception {
         public UnknownIntervalException(String message) {
