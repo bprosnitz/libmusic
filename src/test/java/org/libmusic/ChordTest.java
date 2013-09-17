@@ -44,7 +44,7 @@ public class ChordTest {
     }
 
     @Test
-    public void testFromChordName() {
+    public void testFromChordName() throws Interval.UnknownIntervalException {
         Assert.assertEquals(noteSet("D", "F#", "A"), Chord.fromChordName("D").getNotes());
         Assert.assertEquals(noteSet("E", "G#", "B", "D#"), Chord.fromChordName("Emaj7").getNotes());
         Assert.assertEquals(noteSet("A#", "D", "E#", "G#"), Chord.fromChordName("A#7").getNotes());

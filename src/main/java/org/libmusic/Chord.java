@@ -17,7 +17,7 @@ public class Chord implements NoteProvider {
         this.notes = Sets.newHashSet(notes);
     }
 
-    public static Chord fromChordName(String chordName) {
+    public static Chord fromChordName(String chordName) throws Interval.UnknownIntervalException {
         final Pattern notePattern = Pattern.compile("^\\s*([A-G][#b]*)(.*)$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = notePattern.matcher(chordName);
         if (!matcher.matches()) {
@@ -77,17 +77,7 @@ public class Chord implements NoteProvider {
         }
 
         for (int added : addNumbers) {
-            Interval interval;
-            switch (added) {
-                case 6:
-                    interval = Interval.MajorSixth;
-                    break;
-                case 9:
-                    interval = Interval.MajorNinth;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unsupported interval number: " + added);
-            }
+            Interval interval = Interval.fromIntervalNumber(added, true);
             notesInChord.add(rootNote.shiftNote(interval.getDistance()));
         }
 
